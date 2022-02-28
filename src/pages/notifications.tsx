@@ -1,9 +1,12 @@
-import Layout from "../components/template/Layout"
+import Layout from "../components/template/Layout";
+import useAppData from "../data/hook/useAppData";
 
 export default function Notifications() {
+  const ctx = useAppData();
+
   return (
     <Layout title="Notifications" subtitle="Work in progress">
-      <h3>Content</h3>
+      <button onClick={ctx.alterTheme}>Alter theme</button>
     </Layout>
   )
 }
