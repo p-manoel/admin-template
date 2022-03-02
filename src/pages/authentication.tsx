@@ -2,25 +2,35 @@ import { useState } from "react";
 import AuthInput from "../components/auth/AuthInput";
 import { IconExclamation, IconGoogle } from "../components/icons";
 import useAppData from "../data/hook/useAppData";
+import useAuth from "../data/hook/useAuth";
 
 interface AuthenticationProps {
 
 }
 
 export default function Authentication(props: AuthenticationProps) {
+  const { signup, login, googleLogin } = useAuth();
+
   const [authenticationType, setAuthenticationType] = useState<'login' | 'signup'>('login');
   const [error, setError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function showError(message: string, duration = 3) {
+  function showError(message: string, duration = 7) {
     setError(message);
     setTimeout(() => setError(''), duration * 1000);
   }
 
-  function submit() {
-    if (authenticationType === 'login') showError('Unable to Login! Try again later.');
-    else showError('Unable to Signup! Try again later.');
+  async function submit() {
+    try {
+      if(authenticationType === 'login') {
+        await login(email, password);
+      } else {
+        await signup(email, password)
+      }
+    } catch(e: any) {
+      showError(e?.message ?? 'Unknown erro!');
+    }
   }
 
   return (
@@ -80,7 +90,7 @@ export default function Authentication(props: AuthenticationProps) {
 
         <hr className="my-6 border-gray-300 w-full" />
 
-        <button onClick={submit} className={`
+        <button onClick={googleLogin} className={`
         flex
         justify-center items-center
         w-full 
