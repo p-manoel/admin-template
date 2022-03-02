@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 import AuthInput from "../components/auth/AuthInput";
 import { IconExclamation, IconGoogle } from "../components/icons";

@@ -27,7 +27,7 @@ async function normalizedUser(firebaseUser: firebase.User) {
   }
 }
 
-function manageCookie(logged: boolean) {
+function manageCookie(logged: any) {
   if(logged) {
     Cookies.set('admin-template-auth', logged, {
       expires: 7
@@ -37,7 +37,7 @@ function manageCookie(logged: boolean) {
   }
 }
 
-export function AuthProvider(props: AuthContextProps) {
+export function AuthProvider(props: any) {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>();
 
@@ -56,7 +56,7 @@ export function AuthProvider(props: AuthContextProps) {
     }
   }
 
-  async function signup(email, password) {
+  async function signup(email: string, password: string) {
     try {
       setLoading(true);
 
@@ -84,7 +84,7 @@ export function AuthProvider(props: AuthContextProps) {
     }
   }
 
-  async function login(email, password) {
+  async function login(email: string, password: string) {
     try {
       setLoading(true);
       const response = await firebase.auth().signInWithEmailAndPassword(email, password);

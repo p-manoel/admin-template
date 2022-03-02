@@ -5,10 +5,10 @@ interface AppContextProps {
   alterTheme: () => void
 }
 
-const AppContext  = createContext<AppContextProps>({});
+const AppContext  = createContext(null);
 
 export function AppProvider(props: any) {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState<string>('dark');
 
   function alterTheme() {
   const newTheme = theme === 'dark' ? '' : 'dark';
